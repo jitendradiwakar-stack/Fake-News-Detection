@@ -1,0 +1,37 @@
+# Node
+node_modules/
+.pnp/
+.pnp.js
+# Build outputs
+dist/
+build/
+.vite/
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+*.log
+# Environment
+.env
+.env.*
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+.envrc
+.pytest_cache/
+# OS
+.DS_Store
+Thumbs.db
+# IDEs
+.vscode/
+.idea/
+# Others
+coverage/
+coverage.xml
+*.sqlite3
