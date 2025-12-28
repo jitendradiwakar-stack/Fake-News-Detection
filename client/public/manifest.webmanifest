@@ -1,0 +1,20 @@
+{
+  "name": "News Authenticity Detection",
+  "short_name": "NewsAuth",
+  "description": "Verify news authenticity instantly with AI-powered detection",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3ABAB4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["news", "utilities", "productivity"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
