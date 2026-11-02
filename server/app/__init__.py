@@ -36,6 +36,12 @@ def create_app(enable_scheduler: bool = True):
         "http://127.0.0.1:8080",
         "http://127.0.0.1:5173"
     ]
+    env_origins = os.getenv("CORS_ALLOWED_ORIGINS")
+    if env_origins:
+        for origin in env_origins.split(","):
+            cleaned = origin.strip()
+            if cleaned and cleaned not in trusted_origins:
+                trusted_origins.append(cleaned)
 
     CORS(app, resources={
         r"/api/*": {

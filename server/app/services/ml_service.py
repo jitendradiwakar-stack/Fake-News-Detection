@@ -30,9 +30,13 @@ class MLDetectionService:
     def load_models(cls, model_dir: Optional[str] = None):
         try:
             if model_dir is None:
-                current_dir = os.path.dirname(os.path.abspath(__file__))
-                project_root = os.path.dirname(os.path.dirname(current_dir))
-                model_dir = os.path.join(project_root, '..', 'model')
+                env_model_dir = os.getenv('MODEL_DIR')
+                if env_model_dir and os.path.exists(env_model_dir):
+                    model_dir = env_model_dir
+                else:
+                    current_dir = os.path.dirname(os.path.abspath(__file__))
+                    project_root = os.path.dirname(os.path.dirname(current_dir))
+                    model_dir = os.path.join(project_root, '..', 'model')
 
             bn_model_path = os.path.join(model_dir, 'bn_model.pkl')
             en_model_path = os.path.join(model_dir, 'en_model.pkl')
