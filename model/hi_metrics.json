@@ -1,0 +1,21 @@
+{
+  "model_name": "SatyaCheck Hindi/Hinglish Logistic Classifier v1.0",
+  "accuracy": 0.997,
+  "precision": 0.997,
+  "recall": 0.997,
+  "f1_score": 0.997,
+  "confusion_matrix": [
+    [
+      248,
+      0
+    ],
+    [
+      1,
+      87
+    ]
+  ],
+  "train_samples": 1344,
+  "test_samples": 336,
+  "feature_count": 12000,
+  "dataset_source": "BoomLive & BBC Hindi Verified Research Corpus (Siddhartha15)"
+}

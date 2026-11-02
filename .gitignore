@@ -35,3 +35,5 @@ Thumbs.db
 coverage/
 coverage.xml
 *.sqlite3
+*.db
+instance/

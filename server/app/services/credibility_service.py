@@ -1,12 +1,39 @@
+import logging
+from urllib.parse import urlparse
+
 try:
     from ddgs import DDGS
 except ImportError:
     from duckduckgo_search import DDGS
-from urllib.parse import urlparse
+
+logger = logging.getLogger(__name__)
 
 
 class CredibilityCheckService:
     """Service to check credibility of news by searching trusted portals."""
+
+    # Top Hindi & Indian Fact-Checking portals
+    HINDI_PORTALS = {
+        'jagran.com': 'Dainik Jagran',
+        'amarujala.com': 'Amar Ujala',
+        'navbharattimes.indiatimes.com': 'Navbharat Times',
+        'bhaskar.com': 'Dainik Bhaskar',
+        'aajtak.in': 'Aaj Tak',
+        'ndtv.in': 'NDTV India',
+        'bbc.com/hindi': 'BBC Hindi',
+        'abplive.com': 'ABP News',
+        'zeenews.india.com/hindi': 'Zee News Hindi',
+        'livehindustan.com': 'Hindustan',
+        'indiatv.in': 'India TV',
+        'boomlive.in': 'BOOM Live Fact Check',
+        'altnews.in': 'Alt News Fact Check',
+        'factcrescendo.com': 'Fact Crescendo',
+        'vishvasnews.com': 'Vishvas News',
+        'thequint.com/hindi': 'Quint Hindi',
+        'patrika.com': 'Rajasthan Patrika',
+        'thewirehindi.com': 'The Wire Hindi',
+        'firstpost.com/hindi': 'Firstpost Hindi'
+    }
 
     # Top Bangla news portals
     BANGLA_PORTALS = {
@@ -39,152 +66,109 @@ class CredibilityCheckService:
         'theindependentbd.com': 'The Independent',
         'observerbd.com': 'The Observer',
         'prothomalo.com/english': 'Prothom Alo English',
+        'thehindu.com': 'The Hindu',
+        'indianexpress.com': 'The Indian Express',
+        'timesofindia.indiatimes.com': 'Times of India',
+        'hindustantimes.com': 'Hindustan Times',
         'theguardian.com': 'The Guardian',
         'bbc.com/news': 'BBC News',
         'reuters.com': 'Reuters',
         'aljazeera.com': 'Al Jazeera',
-        'cnn.com': 'CNN'
+        'cnn.com': 'CNN',
+        'apnews.com': 'Associated Press'
     }
 
-    ALL_PORTALS = {**BANGLA_PORTALS, **ENGLISH_PORTALS}
+    ALL_PORTALS = {**HINDI_PORTALS, **BANGLA_PORTALS, **ENGLISH_PORTALS}
 
     @classmethod
-    def check_credibility(cls, headline: str):
-        """
-        Search DuckDuckGo for the headline and check if trusted portals have covered it.
+    def get_favicon_url(cls, domain: str) -> str:
+        """Get favicon URL using Google's favicon service."""
+        clean_domain = domain.split('/')[0]
+        return f"https://www.google.com/s2/favicons?domain={clean_domain}&sz=64"
 
-        Args:
-            headline: The news headline to search for
-
-        Returns:
-            dict: Contains found_sources list with portal info
-        """
+    @classmethod
+    def extract_domain(cls, url: str) -> str:
+        """Extract clean domain from URL."""
         try:
-            # Search using DuckDuckGo
-            search_results = cls._search_duckduckgo(headline)
-
-            # Filter results to only trusted portals
-            found_sources = cls._filter_trusted_sources(search_results)
-
-            return {
-                'found_sources': found_sources,
-                'total_found': len(found_sources)
-            }
-        except Exception as e:
-            print(f"Error in credibility check: {str(e)}")
-            return {
-                'found_sources': [],
-                'total_found': 0,
-                'error': str(e)
-            }
+            parsed = urlparse(url)
+            domain = parsed.netloc.lower()
+            if domain.startswith('www.'):
+                domain = domain[4:]
+            return domain
+        except Exception:
+            return ""
 
     @classmethod
-    def _search_duckduckgo(cls, query: str):
+    def match_portal(cls, url: str) -> tuple[str, str] | None:
         """
-        Perform a DuckDuckGo search and extract results from both BD and US regions.
-
-        Args:
-            query: Search query string
-
-        Returns:
-            list: Combined list of search result dictionaries from both regions
+        Check if URL matches any trusted portal.
+        Returns (portal_name, matched_key) or None.
         """
-        all_results = []
+        domain = cls.extract_domain(url)
+        url_lower = url.lower()
 
-        # Search in both Bangladesh and USA regions for better coverage
-        regions = ['bd-en', 'us-en']
+        # Check full path matches first (e.g. bbc.com/hindi)
+        for portal_key, portal_name in cls.ALL_PORTALS.items():
+            if '/' in portal_key:
+                if portal_key in url_lower:
+                    return portal_name, portal_key
 
-        for region in regions:
-            try:
-                # Initialize DuckDuckGo search with timeout
-                ddgs = DDGS(timeout=10)
+        # Check domain-only matches
+        for portal_key, portal_name in cls.ALL_PORTALS.items():
+            if '/' not in portal_key:
+                if domain == portal_key or domain.endswith('.' + portal_key):
+                    return portal_name, portal_key
 
-                # Perform text search
-                search_results = ddgs.text(
-                    query=query,
-                    region=region,  # Bangladesh English or US English
-                    safesearch='off',
-                    max_results=20,  # 20 per region = 40 total
-                    backend='auto'  # Use multiple backends for reliability
-                )
-
-                # Convert to our format
-                for result in search_results:
-                    # ddgs returns: title, href, body
-                    all_results.append({
-                        'title': result.get('title', ''),
-                        'url': result.get('href', ''),
-                        'region': region
-                    })
-
-            except Exception as e:
-                print(
-                    f"Error searching DuckDuckGo in region {region}: {str(e)}")
-                continue
-
-        # Remove duplicate URLs
-        seen_urls = set()
-        unique_results = []
-        for result in all_results:
-            if result['url'] and result['url'] not in seen_urls:
-                seen_urls.add(result['url'])
-                unique_results.append(result)
-
-        return unique_results
+        return None
 
     @classmethod
-    def _filter_trusted_sources(cls, search_results):
+    def check_credibility(cls, headline: str, max_results: int = 15) -> dict:
         """
-        Filter search results to only include trusted news portals.
-
-        Args:
-            search_results: List of search result dictionaries
-
-        Returns:
-            list: Filtered list with portal name, url, title, and favicon
+        Search DuckDuckGo for the headline and find matches on trusted portals.
+        Gracefully falls back within 3 seconds if network fails or search is throttled,
+        allowing the caller to rely seamlessly on offline ML predictions.
         """
         found_sources = []
-
-        for result in search_results:
-            try:
-                url = result['url']
-                parsed_url = urlparse(url)
-                domain = parsed_url.netloc.lower()
-
-                # Remove 'www.' prefix
-                domain = domain.replace('www.', '')
-
-                # Check if domain matches any trusted portal
-                matched_portal = None
-                portal_name = None
-
-                for portal_domain, name in cls.ALL_PORTALS.items():
-                    if portal_domain in domain or domain in portal_domain:
-                        matched_portal = portal_domain
-                        portal_name = name
-                        break
-
-                if matched_portal and portal_name:
-                    # Generate favicon URL
-                    favicon_url = f"https://www.google.com/s2/favicons?domain={domain}&sz=32"
-
-                    found_sources.append({
-                        'portal_name': portal_name,
-                        'url': url,
-                        'title': result['title'],
-                        'favicon': favicon_url,
-                        'domain': domain
-                    })
-
-            except Exception as e:
-                continue
-
-        # Remove duplicates based on domain
         seen_domains = set()
-        unique_sources = []
-        for source in found_sources:
-            if source['domain'] not in seen_domains:
-                seen_domains.add(source['domain'])
-                unique_sources.append(source)
 
-        return unique_sources
+        try:
+            with DDGS(timeout=3) as ddgs:
+                results = list(ddgs.text(headline, max_results=max_results))
+
+                for result in results:
+                    url = result.get('href', '')
+                    title = result.get('title', '')
+
+                    match = cls.match_portal(url)
+                    if match:
+                        portal_name, portal_key = match
+                        domain = cls.extract_domain(url)
+
+                        if portal_name not in seen_domains:
+                            seen_domains.add(portal_name)
+                            found_sources.append({
+                                'portal_name': portal_name,
+                                'url': url,
+                                'title': title,
+                                'favicon': cls.get_favicon_url(domain),
+                                'domain': domain
+                            })
+
+            return {
+                'headline': headline,
+                'found_sources': found_sources,
+                'total_found': len(found_sources),
+                'is_credible': len(found_sources) > 0,
+                'network_fallback': False
+            }
+
+        except Exception as e:
+            logger.warning(f"Credibility search fallback activated ({type(e).__name__}): {e}")
+            return {
+                'headline': headline,
+                'found_sources': [],
+                'total_found': 0,
+                'is_credible': False,
+                'network_fallback': True,
+                'error': 'Credibility search temporarily unavailable'
+            }

@@ -1,4 +1,4 @@
-import { CredibilityData } from '@/services/detection';
+﻿import { CredibilityData } from '@/services/detection';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, ExternalLink, Shield } from 'lucide-react';
 import { useState } from 'react';

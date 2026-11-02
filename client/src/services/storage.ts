@@ -1,4 +1,4 @@
-import { DetectionResult } from './detection';
+﻿import { DetectionResult } from './detection';
 
 const STORAGE_KEY = 'truth-beacon-history';
 const MAX_HISTORY_ITEMS = 50;

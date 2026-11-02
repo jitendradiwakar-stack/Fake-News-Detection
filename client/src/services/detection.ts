@@ -27,6 +27,13 @@ export interface DetectionResult {
   analyzedText?: string;
   headline?: string;
   timestamp: Date;
+  detected_language?: string;
+  language_name?: string;
+  top_signals?: {
+    term: string;
+    weight: number;
+    impact: 'authentic' | 'fake';
+  }[];
   credibility?: CredibilityData;
   credibilityBoost?: {
     applied: boolean;
@@ -42,6 +49,13 @@ interface DetectionAPIResponse {
     authentic: number;
   };
   headline?: string;
+  detected_language?: string;
+  language_name?: string;
+  top_signals?: {
+    term: string;
+    weight: number;
+    impact: 'authentic' | 'fake';
+  }[];
   credibility_boost?: {
     applied: boolean;
     boost_amount: number;
@@ -147,6 +161,9 @@ function mapAPIResponseToResult(
     analyzedText: input,
     headline: response.headline,
     timestamp: new Date(),
+    detected_language: response.detected_language,
+    language_name: response.language_name,
+    top_signals: response.top_signals,
     credibilityBoost: response.credibility_boost,
   };
 }

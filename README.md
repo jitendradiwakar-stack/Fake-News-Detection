@@ -1,136 +1,481 @@
-# Fake News Detector
+# SatyaCheck
+### AI-Powered Multilingual News Verification & Digital Media Forensics
 
-A web-based **Fake News Detection system** that verifies news headlines and article content using machine learning models, exposed through a Flask REST API and consumed by a modern React frontend.
+<p align="center">
+  <strong>Understand the news. Question the claim. Verify the evidence.</strong>
+</p>
 
-The project is designed as a **full-stack application** where users can submit either a **news headline or a news article URL** and receive predictions about whether the content is likely to be fake or credible. It supports **English and Bangla** datasets and demonstrates an end-to-end ML-backed web workflow, from web content extraction and preprocessing to model inference and frontend visualization.
+<p align="center">
+  An intelligent platform for analyzing misinformation, validating news claims, and investigating potentially manipulated digital media.
+</p>
 
-## Project Overview
+---
 
-The Fake News Detector aims to address the growing spread of misinformation by providing an automated, lightweight verification tool for online news. The system separates concerns cleanly:
+## Overview
 
-- A **frontend** built with Vite and React for fast development and responsive UI
-- A **backend API** built with Flask that handles scraping, preprocessing, and inference
-- **Machine learning models** trained offline using labeled datasets and loaded at runtime for prediction
+**SatyaCheck** is a multilingual AI-powered verification platform designed to help users assess the credibility of online information and investigate potentially manipulated media.
 
-The application focuses primarily on **headline-level and extracted article text analysis**, making it suitable for quick credibility checks of online news links.
+The platform combines machine learning-based text classification, external news-source corroboration, and an interactive video forensics environment within a unified application.
 
-## Screenshots
+Built to address the challenges of misinformation across multilingual digital ecosystems, SatyaCheck supports English, Hindi, Hinglish, and Bengali content analysis.
 
-Below are screenshots of the application interface and verification results:
+Rather than relying on a single verification signal, the system brings together automated predictions and external information retrieval to provide users with additional context for evaluating suspicious claims.
 
-![Landing Page](assets/landing_page.png)
+### Core Capabilities
 
-_Landing page showing the input form._
+| Capability | Description |
+|---|---|
+| Multilingual Analysis | Classifies news content across supported languages. |
+| Claim Verification | Cross-references submitted claims with external news coverage. |
+| Video Forensics | Provides visual inspection tools for potential deepfake indicators. |
+| Secure Authentication | JWT-based authentication with protected user resources. |
+| Personal Dashboard | Tracks individual analysis activity and statistics. |
+| Prediction History | Search, filter, inspect, and manage previous analyses. |
 
-![Verification Result and History](assets/verification_result_and_history.png)
+---
 
-_Verification results card and recent enquiries history._
+## Product Modules
 
-## Key Features
+### 01. Multilingual Intelligence Engine
 
-- Fake news classification from headlines or news URLs
-- Automated article content extraction using BeautifulSoup
-- RESTful API for detection and credibility checking
-- Support for multiple languages (English and Bangla datasets)
-- Decoupled frontend and backend architecture
-- Reproducible development environment using `pnpm` and Python virtual environments
+A language-aware text classification pipeline designed to identify patterns associated with misleading or fabricated news.
 
-## System Architecture (High-Level)
+**Supported languages**
+- English
+- Hindi
+- Hinglish
+- Bengali
 
-1. **User Interface (React + Vite)**  
-   Users submit a news headline or a news article URL through the web UI.
+**Capabilities**
+- Headline and article classification.
+- URL-based content analysis.
+- Automatic language identification.
+- TF-IDF feature extraction.
+- Logistic Regression inference.
+- Authenticity scoring and prediction confidence.
 
-2. **Backend API (Flask)**  
-   The frontend sends requests to Flask endpoints exposed under `/api`.
+### 02. News Credibility Verification
 
-3. **Content Extraction Layer**  
-   If a URL is provided, the backend fetches the web page and extracts relevant textual content using **BeautifulSoup**.
+An external evidence retrieval layer that supplements machine learning predictions with relevant news coverage.
 
-4. **ML Inference Layer**  
-   Pre-trained models and vectorizers are loaded by the backend service and used to generate predictions.
+- DuckDuckGo-powered news discovery.
+- Search across 40+ configured news portals.
+- Relevant article retrieval.
+- Supporting and conflicting coverage inspection.
+- Additional context for submitted claims.
 
-5. **Response Handling**  
-   The backend returns prediction results to the frontend in JSON format.
+### 03. Deepfake Video Forensics
 
-## Web Content Extraction (BeautifulSoup)
+An interactive forensic inspection environment for examining potential visual manipulation indicators.
 
-The backend uses **BeautifulSoup** to extract meaningful text from news article URLs:
+- Facial landmark visualization using a 68-point mesh.
+- Facial movement inspection.
+- Lip synchronization analysis interface.
+- Blink-pattern monitoring.
+- Frame-level telemetry visualization.
 
-- Sends an HTTP request to the provided news URL
-- Parses the HTML response using BeautifulSoup
-- Removes non-content elements such as scripts, styles, navigation bars, and ads
-- Extracts headline text and main article body (e.g., `<h1>`, `<p>` tags)
-- Normalizes and concatenates the extracted text
-- Passes cleaned text to the machine learning pipeline for inference
+### 04. Identity & Access Management
 
-This allows users to verify news articles directly from URLs without manually copying headlines or content.
+A secure account management layer supporting personalized application experiences.
 
-## Tech Stack
+- Account registration and authentication.
+- Email and username-based login.
+- Password strength feedback.
+- PBKDF2:SHA256 password hashing.
+- Signed JWT access tokens.
+- HttpOnly cookie authentication.
+- User-level resource authorization.
 
-### Frontend
+### 05. Forensic Intelligence Dashboard
 
-- Vite
-- React
-- pnpm (package management)
+A personalized workspace for managing verification activity.
 
-### Backend
+- Analysis statistics and classification distribution.
+- Recent activity tracking.
+- Detailed prediction inspection.
+- Searchable prediction history.
+- Classification-based filtering.
+- Pagination and sorting.
+- Individual and bulk history deletion.
+- Profile and password management.
 
-- Python 3
-- Flask
-- BeautifulSoup (HTML parsing and content extraction)
-- Requests (HTTP fetching)
+### 06. Internationalization
 
-### Machine Learning
+A multilingual interface powered by i18next.
 
-- Jupyter Notebooks (for experimentation and training)
-- CSV-based datasets for English and Bangla
+- English
+- Hindi
+- Hinglish
 
-## Supported API Endpoints
+Language preferences are maintained across sessions.
 
-| Method | Endpoint                 | Description                                                     |
-| ------ | ------------------------ | --------------------------------------------------------------- |
-| POST   | `/api/detector`          | Detects whether a headline or extracted article is fake or real |
-| POST   | `/api/credibility-check` | Returns a credibility assessment                                |
+---
 
-## Models & Datasets
+## System Design
 
-- **Notebooks**
+SatyaCheck follows a modular client-server architecture that separates presentation, application logic, machine learning inference, external verification, and data persistence.
 
-  - `model/Detector.ipynb`
-  - `model/Detector (2).ipynb`
-
-- **Datasets**
-  - `model/dataset/en.csv`
-  - `model/dataset/bn.csv`
-
-## Setup & Running the Project
-
-### Frontend
-
-```bash
-cd client
-pnpm install
-pnpm run dev
+```text
+                        CLIENT APPLICATION
+                    React 18 / Vite / Tailwind
+                               |
+             +-----------------+-----------------+
+             |                 |                 |
+             v                 v                 v
+        Identity &        News Analysis      Deepfake
+        Dashboard         & Verification      Forensics
+             |                 |                 |
+             +-----------------+-----------------+
+                               |
+                            REST API
+                               |
+                               v
+                       FLASK APPLICATION
+                               |
+             +-----------------+-----------------+
+             |                 |                 |
+             v                 v                 v
+       Authentication    ML Inference       Evidence
+          Services          Engine          Retrieval
+             |                 |                 |
+             |           +-----+-----+           |
+             |           |     |     |           |
+             |           v     v     v           |
+             |          EN    HI    BN           |
+             |           Models                  |
+             |                                   |
+             +-----------------+-----------------+
+                               |
+                               v
+                         DATA LAYER
+                               |
+                       +-------+-------+
+                       |               |
+                       v               v
+                    MongoDB          SQLite
 ```
 
-### Backend
+### Architectural Principles
+
+- **Separation of concerns:** Frontend, backend, ML, and persistence responsibilities are separated.
+- **Modularity:** Individual services can evolve independently.
+- **Authentication boundaries:** Protected resources require appropriate authorization.
+- **Persistence flexibility:** MongoDB and SQLite support different deployment scenarios.
+- **Extensibility:** New languages, models, and verification modules can be integrated.
+
+---
+
+## Machine Learning Pipeline
+
+The text verification engine uses a traditional supervised machine learning architecture.
+
+```text
+        Raw Text / News Claim
+                 |
+                 v
+        Input Normalization
+                 |
+                 v
+        Language Identification
+                 |
+                 v
+        Language-Specific Processing
+                 |
+                 v
+          TF-IDF Vectorization
+                 |
+                 v
+       Logistic Regression Model
+                 |
+                 v
+        Classification Output
+                 |
+        +--------+--------+
+        |        |        |
+        v        v        v
+     Authentic Suspicious Fake
+                 |
+                 v
+       Prediction & Confidence
+```
+
+### Model Performance
+
+| Language | Algorithm | Reported Accuracy |
+|---|---|---:|
+| English | Logistic Regression | 93.8% |
+| Hindi | Logistic Regression | 99.7% |
+| Bengali | Logistic Regression | 92.4% |
+
+*Reported experimental results. Performance should be interpreted alongside dataset quality, test methodology, class distribution, and independent evaluation.*
+
+---
+
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 18 |
+| Build Tool | Vite |
+| UI Styling | Tailwind CSS |
+| Internationalization | i18next |
+| Backend | Python / Flask |
+| Machine Learning | Scikit-learn |
+| Feature Engineering | TF-IDF |
+| Classification | Logistic Regression |
+| Database | MongoDB / SQLite |
+| Database Integration | PyMongo |
+| Authentication | JWT |
+| Password Security | PBKDF2:SHA256 |
+| External Search | DuckDuckGo |
+| Model Persistence | Joblib |
+
+---
+
+## Data Architecture
+
+The application maintains two primary data entities.
+
+### User Entity
+
+Stores account identity, authentication information, and account lifecycle metadata.
+
+| Field | Description |
+|---|---|
+| id | Unique user identifier |
+| full_name | Display name |
+| username | Unique username |
+| email | Normalized email address |
+| password_hash | Hashed authentication credential |
+| created_at | Account creation time |
+| updated_at | Last profile modification |
+| last_login | Most recent login |
+
+### Prediction Entity
+
+Stores verification results associated with individual users.
+
+| Field | Description |
+|---|---|
+| id | Unique prediction identifier |
+| user_id | Associated account |
+| input_text | Submitted content or URL |
+| input_type | Input classification |
+| predicted_label | Model output |
+| prediction_code | Numeric classification |
+| authenticity_score | Calculated authenticity score |
+| confidence | Prediction confidence |
+| detected_language | Identified language |
+| headline | Extracted claim or headline |
+| model_version | Inference model identifier |
+| created_at | Analysis timestamp |
+
+### Persistence Strategy
+
+The application supports:
+
+- **MongoDB:** Primary configurable persistence backend.
+- **SQLite:** Local fallback for standalone execution.
+
+Database-level uniqueness constraints and user-specific prediction indexes support data integrity and efficient history retrieval.
+
+---
+
+## API Reference
+
+All application APIs use the `/api` namespace.
+
+### Authentication
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/auth/signup` | Create an account |
+| POST | `/api/auth/login` | Authenticate a user |
+| POST | `/api/auth/logout` | End the authenticated session |
+| GET | `/api/auth/me` | Retrieve current user |
+
+### Detection & Verification
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| POST | `/api/detector` | Execute text or URL analysis |
+| POST | `/api/credibility-check` | Retrieve external news coverage |
+
+### Dashboard & History
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/api/dashboard/stats` | Retrieve dashboard metrics |
+| GET | `/api/history` | Retrieve prediction records |
+| GET | `/api/history/:id` | Retrieve prediction details |
+| DELETE | `/api/history/:id` | Delete a prediction |
+| DELETE | `/api/history` | Clear prediction history |
+
+### Account Management
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/api/account` | Retrieve account information |
+| PATCH | `/api/account` | Update profile or password |
+
+**History filtering parameters**
+
+```http
+GET /api/history?q=election&label=fake&page=1&limit=10&sort=newest
+```
+
+---
+
+## Repository Structure
+
+```text
+SatyaCheck/
+│
+├── client/                  # React frontend
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── hooks/
+│   │   ├── i18n/
+│   │   └── assets/
+│   └── package.json
+│
+├── server/                  # Flask backend
+│   ├── controllers/
+│   ├── routes/
+│   ├── middleware/
+│   ├── models/
+│   ├── services/
+│   ├── ml_models/
+│   ├── database/
+│   ├── instance/
+│   ├── run.py
+│   └── requirements.txt
+│
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Local Development
+
+### Requirements
+
+- Python 3.10+
+- Node.js and npm
+- Git
+- MongoDB (optional)
+
+### 1. Clone
 
 ```bash
+git clone <YOUR_REPOSITORY_URL>
+cd SatyaCheck
+```
+
+### 2. Configure Backend
+
+```powershell
 cd server
-python3 -m venv venv
-source venv/bin/activate
+
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
 pip install -r requirements.txt
+```
+
+Create a `.env` file:
+
+```env
+FLASK_SECRET_KEY=your_secret_key
+JWT_SECRET_KEY=your_jwt_secret
+MONGO_URI=your_mongodb_uri
+```
+
+Start the backend:
+
+```bash
 python run.py
 ```
 
-The frontend expects the backend to be available at:
+Backend: `http://127.0.0.1:5000`
 
+### 3. Configure Frontend
+
+Open another terminal:
+
+```bash
+cd client
+npm install
+npm run dev
 ```
-http://localhost:5000/api
-```
 
-## Intended Use
+Frontend: `http://localhost:8080`
 
-- Academic coursework and demonstrations
-- Learning full-stack ML application design
-- Practicing web scraping with BeautifulSoup
+*Ensure the frontend port matches your Vite configuration.*
+
+---
+
+## Security & Data Protection
+
+Security controls are implemented across authentication, authorization, and data persistence.
+
+| Area | Implementation |
+|---|---|
+| Credential Storage | PBKDF2:SHA256 hashing |
+| Session Authentication | Signed JWT |
+| Token Lifetime | 7 days |
+| Cookie Protection | HttpOnly |
+| Resource Authorization | Ownership validation |
+| Account Integrity | Unique email and username constraints |
+| Data Isolation | User-scoped prediction queries |
+
+**Security considerations:** Production deployment should additionally enforce HTTPS, secure cookie settings, CSRF protection where applicable, rate limiting, input validation, secret rotation, and appropriate token revocation strategies.
+
+---
+
+## Known Limitations
+
+- Text classification is dependent on the training dataset and language coverage.
+- Model confidence is not equivalent to factual certainty.
+- External news search cannot guarantee comprehensive evidence retrieval.
+- Visual forensic indicators are not conclusive proof of deepfake generation.
+- The current text classification models do not replace human fact-checking.
+- Production-grade video classification requires a separately validated temporal deepfake detection model.
+
+---
+
+## Roadmap
+
+| Priority | Planned Enhancement |
+|---|---|
+| High | Transformer-based multilingual classification |
+| High | Explainable AI and prediction reasoning |
+| High | Evidence-backed claim verification |
+| Medium | Screenshot and OCR analysis |
+| Medium | Audio deepfake detection |
+| Medium | Neural video manipulation detection |
+| Medium | Automated forensic report generation |
+| Future | Browser extension |
+| Future | Mobile application |
+
+---
+
+## Responsible AI
+
+SatyaCheck is designed to assist information verification, not replace independent judgment.
+
+Its predictions should be treated as investigative signals. Users should consult primary sources, reliable reporting, and verifiable evidence before making decisions or sharing potentially misleading content.
+
+---
+
+## Project Philosophy
+
+> Information travels fast. Verification should travel faster.
+
+SatyaCheck aims to make digital information verification more accessible through multilingual intelligence, evidence retrieval, and media forensics.
+
+**Question the claim. Investigate the evidence. Think before you share.**

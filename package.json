@@ -1,0 +1,17 @@
+{
+  "name": "satyacheck-root",
+  "version": "2.4.0",
+  "private": true,
+  "description": "SatyaCheck — Multilingual Fake News & Deepfake Media Forensics",
+  "scripts": {
+    "dev": "npm --prefix client run dev",
+    "build": "npm --prefix client run build",
+    "client": "npm --prefix client run dev",
+    "server": "server\\venv\\Scripts\\python.exe server/run.py",
+    "test:features": "server\\venv\\Scripts\\python.exe server/test_features_suite.py",
+    "test:feed": "server\\venv\\Scripts\\python.exe server/test_fact_check_suite.py",
+    "test:rotation": "server\\venv\\Scripts\\python.exe server/test_dynamic_rotation_suite.py",
+    "test:onboarding": "server\\venv\\Scripts\\python.exe server/test_onboarding_recommendations_suite.py",
+    "start": "npm --prefix client run dev"
+  }
+}

@@ -3,19 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#3ABAB4" />
-    <title>Fake News Detector - Verify News Authenticity</title>
-    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#121212" />
+    <title>SatyaCheck — Multilingual Fake News & Deepfake Forensics</title>
+    <meta
+      name="description"
+      content="Understand the news. Question the claim. Check the evidence. AI-powered multilingual news & deepfake video verification."
+    />
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('satyacheck_theme');
+          var isDark = theme === 'dark' || (!theme && !window.matchMedia('(prefers-color-scheme: light)').matches);
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
 
-  <body>
+  <body class="antialiased selection:bg-zinc-800 selection:text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

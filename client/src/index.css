@@ -4,99 +4,104 @@
 
 @layer base {
   :root {
-    /* Beige color palette */
-    --background: 40 40% 94%;
-    --foreground: 30 10% 20%;
+    /* Clean, Modern Light Mode Palette */
+    --background: 210 40% 98%; /* #F8FAFC */
+    --foreground: 222 47% 11%; /* #0F172A */
 
-    --card: 40 30% 98%;
-    --card-foreground: 30 10% 20%;
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 222 47% 11%; /* #0F172A */
 
-    --popover: 40 30% 98%;
-    --popover-foreground: 30 10% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Simple accent */
-    --primary: 25 75% 58%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 222 47% 11%; /* #0F172A */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
 
-    --secondary: 40 25% 90%;
-    --secondary-foreground: 30 10% 20%;
+    --secondary: 210 40% 96%; /* #F1F5F9 */
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 40 25% 90%;
-    --muted-foreground: 30 10% 45%;
+    --muted: 210 40% 93%; /* #E2E8F0 */
+    --muted-foreground: 215 16% 47%; /* #64748B */
 
-    --accent: 40 25% 90%;
-    --accent-foreground: 30 10% 20%;
+    --accent: 210 40% 92%;
+    --accent-foreground: 222 47% 11%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 40 20% 85%;
-    --input: 40 30% 96%;
-    --ring: 25 75% 58%;
+    --border: 214 32% 91%; /* #E2E8F0 */
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
 
     --radius: 0.5rem;
 
-    --success: 142 71% 45%;
+    --success: 158 64% 40%;
     --success-foreground: 0 0% 100%;
     --error: 0 84% 60%;
     --error-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --sidebar-background: 40 30% 96%;
-    --sidebar-foreground: 30 10% 25%;
-    --sidebar-primary: 25 75% 58%;
+    /* Sidebar and Rail Colors (Light Mode) */
+    --rail-background: 210 40% 95%; /* #F1F5F9 */
+    --sidebar-background: 0 0% 100%; /* #FFFFFF */
+    --sidebar-foreground: 222 47% 25%;
+    --sidebar-primary: 222 47% 11%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 25% 88%;
-    --sidebar-accent-foreground: 30 10% 25%;
-    --sidebar-border: 40 20% 85%;
-    --sidebar-ring: 25 75% 58%;
+    --sidebar-accent: 210 40% 94%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 222 47% 11%;
   }
 
   .dark {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 95%;
+    /* Pure Neutral Charcoal / Obsidian Theme (#161616 base - NO BLUE) */
+    --background: 0 0% 7%; /* #121212 */
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 11%; /* #1C1C1C */
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 25 75% 58%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 100%; /* #FFFFFF */
+    --primary-foreground: 0 0% 7%; /* #121212 */
 
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 0 0% 13%; /* #212121 */
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 64%; /* #A3A3A3 */
 
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 50%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 18%;
-    --ring: 25 75% 58%;
+    --border: 0 0% 18%; /* #2E2E2E */
+    --input: 0 0% 9%; /* #161616 */
+    --ring: 0 0% 40%;
 
-    --success: 142 71% 45%;
+    --radius: 0.5rem;
+
+    --success: 158 64% 52%;
     --success-foreground: 0 0% 100%;
-    --error: 0 62% 50%;
+    --error: 0 84% 60%;
     --error-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    --sidebar-background: 0 0% 12%;
-    --sidebar-foreground: 0 0% 85%;
-    --sidebar-primary: 25 75% 58%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 18%;
-    --sidebar-accent-foreground: 0 0% 85%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 25 75% 58%;
+    --rail-background: 0 0% 5%; /* #0D0D0D */
+    --sidebar-background: 0 0% 8%; /* #141414 */
+    --sidebar-foreground: 0 0% 70%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 7%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 16%;
+    --sidebar-ring: 0 0% 40%;
   }
 }
 
@@ -105,8 +110,303 @@
     @apply border-border;
   }
 
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Inter', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9375rem; /* 15px base text for clear comfortable readability */
+    line-height: 1.55;
   }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* ==========================================================================
+   SMOOTH TRANSITIONS ENGINE
+   Delivers an ultra-fluid, polished theme switching experience without jank
+   ========================================================================== */
+body,
+header,
+nav,
+aside,
+main,
+section,
+article,
+footer,
+.theme-card,
+.forensic-card {
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   DARK THEME UTILITIES (Obsidian Palette)
+   ========================================================================== */
+.theme-rail {
+  background-color: #0D0D0D;
+  border-color: #242424;
+}
+
+.theme-sidebar {
+  background-color: #141414;
+  border-color: #262626;
+}
+
+.theme-canvas {
+  background-color: #121212;
+}
+
+.theme-card {
+  background-color: #1C1C1C;
+  border: 1px solid #2B2B2B;
+}
+
+.theme-card-inner {
+  background-color: #161616;
+  border: 1px solid #262626;
+}
+
+.theme-btn-primary {
+  background-color: #FFFFFF;
+  color: #121212;
+  font-weight: 600;
+  transition: all 0.15s ease-in-out;
+}
+.theme-btn-primary:hover {
+  background-color: #E5E5E5;
+}
+
+.forensic-card {
+  background: #1C1C1C;
+  border: 1px solid #2B2B2B;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.forensic-card-active {
+  background: #242424;
+  border: 1px solid #383838;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.forensic-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* ==========================================================================
+   LIGHT MODE DESIGN SYSTEM
+   Maps the obsidian architecture to a crisp, high-contrast, modern light theme
+   ========================================================================== */
+
+html:not(.dark),
+html.light {
+  color-scheme: light;
+}
+
+/* Base Body & App Wrappers */
+html:not(.dark) body,
+html.light body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* Header Banners & Translucent Navigation Bars in Light Mode */
+html:not(.dark) header,
+html:not(.dark) [class*="bg-[#121212]/"],
+html:not(.dark) [class*="bg-[#141414]/"],
+html:not(.dark) [class*="bg-[#161616]/"],
+html:not(.dark) [class*="bg-[#181818]/"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+/* Page Backgrounds & Canvas */
+html:not(.dark) .bg-\[\#121212\],
+html:not(.dark) .bg-\[\#0D0D0D\],
+html:not(.dark) .bg-\[\#070A11\],
+html:not(.dark) .bg-\[\#091512\],
+html:not(.dark) .bg-\[\#0A1611\],
+html:not(.dark) .bg-\[\#0E0E0E\],
+html:not(.dark) .bg-\[\#0E1422\],
+html:not(.dark) .bg-\[\#120B10\],
+html:not(.dark) .bg-\[\#141009\],
+html:not(.dark) .bg-\[\#141414\],
+html:not(.dark) .bg-\[\#160B0E\],
+html:not(.dark) .bg-\[\#1A1415\] {
+  background-color: #F8FAFC !important;
+}
+
+/* Hero Section Gradients in Light Mode */
+html:not(.dark) .from-\[\#181818\] {
+  --tw-gradient-from: #FFFFFF var(--tw-gradient-from-position) !important;
+}
+html:not(.dark) .to-\[\#121212\] {
+  --tw-gradient-to: #F1F5F9 var(--tw-gradient-to-position) !important;
+}
+
+/* Elevated Cards, Panels & Content Boxes */
+html:not(.dark) .bg-\[\#161616\],
+html:not(.dark) .bg-\[\#181818\],
+html:not(.dark) .bg-\[\#1A1A1A\],
+html:not(.dark) .bg-\[\#1C1C1C\],
+html:not(.dark) .bg-\[\#1E1E1E\],
+html:not(.dark) .bg-\[\#1F1F1F\],
+html:not(.dark) .bg-\[\#202020\] {
+  background-color: #FFFFFF !important;
+}
+
+/* Subtle surfaces, Inner pills, Controls & Secondary buttons */
+html:not(.dark) .bg-\[\#222222\],
+html:not(.dark) .bg-\[\#242424\],
+html:not(.dark) .bg-\[\#262626\],
+html:not(.dark) .bg-\[\#282828\],
+html:not(.dark) .bg-\[\#2A2A2A\],
+html:not(.dark) .bg-\[\#2B2B2B\],
+html:not(.dark) .bg-\[\#2E2E2E\] {
+  background-color: #F1F5F9 !important;
+}
+
+/* Interactive Hover States in Light Mode */
+html:not(.dark) .hover\:bg-\[\#1C1C1C\]:hover,
+html:not(.dark) .hover\:bg-\[\#222222\]:hover,
+html:not(.dark) .hover\:bg-\[\#242424\]:hover,
+html:not(.dark) .hover\:bg-\[\#282828\]:hover {
+  background-color: #E2E8F0 !important;
+}
+
+/* Borders */
+html:not(.dark) .border-\[\#242424\],
+html:not(.dark) .border-\[\#262626\],
+html:not(.dark) .border-\[\#282828\],
+html:not(.dark) .border-\[\#2B2B2B\],
+html:not(.dark) .border-\[\#2E2E2E\],
+html:not(.dark) .border-\[\#303030\],
+html:not(.dark) .border-\[\#333333\],
+html:not(.dark) .border-\[\#383838\],
+html:not(.dark) .border-\[\#3A3A3A\] {
+  border-color: #E2E8F0 !important;
+}
+
+/* High-Contrast Light Mode Typography (excludes dark buttons) */
+html:not(.dark) .text-white:not(.btn-verify-claim):not(.btn-verify-claim *):not([class*="bg-zinc-9"]):not([class*="bg-zinc-9"] *),
+html:not(.dark) .text-zinc-100:not(.btn-verify-claim):not(.btn-verify-claim *):not([class*="bg-zinc-9"]):not([class*="bg-zinc-9"] *),
+html:not(.dark) .text-zinc-200:not(.btn-verify-claim):not(.btn-verify-claim *):not([class*="bg-zinc-9"]):not([class*="bg-zinc-9"] *) {
+  color: #0F172A !important;
+}
+
+/* Action Buttons with Dark Background in Light Mode must have crisp WHITE text and icons */
+html:not(.dark) .btn-verify-claim,
+html:not(.dark) .btn-verify-claim *,
+html:not(.dark) .bg-zinc-900,
+html:not(.dark) .bg-zinc-900 *,
+html:not(.dark) .bg-zinc-950,
+html:not(.dark) .bg-zinc-950 * {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+html:not(.dark) .btn-verify-claim:hover {
+  background-color: #1E293B !important;
+}
+
+/* Search inputs in light mode */
+html:not(.dark) input[type="text"],
+html:not(.dark) input[type="search"] {
+  background-color: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+html:not(.dark) input[type="text"]:focus,
+html:not(.dark) input[type="search"]:focus {
+  background-color: #FFFFFF !important;
+  border-color: #94A3B8 !important;
+}
+
+html:not(.dark) .text-zinc-300 {
+  color: #334155 !important;
+}
+
+html:not(.dark) .text-zinc-400 {
+  color: #64748B !important;
+}
+
+html:not(.dark) .hover\:text-white:hover {
+  color: #0F172A !important;
+}
+
+/* Primary Contrast CTA Buttons */
+html:not(.dark) .bg-white.text-zinc-950 {
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+}
+html:not(.dark) .bg-white.text-zinc-950:hover {
+  background-color: #1E293B !important;
+}
+html:not(.dark) .bg-white.text-zinc-950 svg {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* Custom Themed Utility Classes */
+html:not(.dark) .theme-rail {
+  background-color: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) .theme-sidebar {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) .theme-canvas {
+  background-color: #F8FAFC !important;
+}
+
+html:not(.dark) .theme-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+}
+
+html:not(.dark) .theme-card-inner {
+  background-color: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+html:not(.dark) .theme-btn-primary {
+  background-color: #0F172A !important;
+  color: #FFFFFF !important;
+}
+html:not(.dark) .theme-btn-primary:hover {
+  background-color: #1E293B !important;
+}
+
+/* Forensic Cards & Grids in Light Mode */
+html:not(.dark) .forensic-card {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html:not(.dark) .forensic-card-active {
+  background: #FFFFFF !important;
+  border: 1px solid #94A3B8 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+html:not(.dark) .forensic-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
 }
